@@ -47,10 +47,11 @@ class HuffmanSuite extends FunSuite {
   }
 
   test("createCodeTree") {
-//    val list = "someText".toList
-    val list = "aaaaaaaabbbcdefgh".toList
-   val codeTree = createCodeTree(list)
-    println(codeTree)
+    new TestTrees {
+      val list = "aaaabbbccd".toList
+      val codeTree = createCodeTree(list)
+      assert(codeTree === Fork(Leaf('a',4),Fork(Fork(Leaf('d',1),Leaf('c',2),List('d', 'c'),3),Leaf('b',3),List('d', 'c', 'b'),6),List('a', 'd', 'c', 'b'),10))
+    }
   }
 
   test("singleton") {

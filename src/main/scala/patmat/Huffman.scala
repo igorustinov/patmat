@@ -127,17 +127,13 @@ object Huffman {
    * unchanged.
    */
     def combine(trees: List[CodeTree]): List[CodeTree] = {
-      //if (trees.isEmpty || singleton(trees)) trees
       def insert(fork: Fork, trees: List[CodeTree]) : List[CodeTree] = {
-        if (trees.isEmpty || weight(trees.head) >= fork.weight) fork :: trees
-        else {
-          trees.head :: insert(fork, trees.tail)
-        }
+        if (trees.isEmpty) List(fork)
+        else if (weight(trees.head) >= fork.weight) fork :: trees
+        else trees.head :: insert(fork, trees.tail)
       }
       if (singleton(trees)) trees
       else {
-        //
-        //makeCodeTree(trees.head, trees.tail.head) :: trees.tail.tail //good
         val fork = makeCodeTree(trees.head, trees.tail.head)
         insert(fork, trees.tail.tail)
       }
